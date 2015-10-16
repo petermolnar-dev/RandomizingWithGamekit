@@ -7,38 +7,68 @@
 //
 
 #import "ViewController.h"
+@import GameKit;
 
 @interface ViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *times1;
-@property (strong, nonatomic) IBOutlet UILabel *times2;
-@property (strong, nonatomic) IBOutlet UILabel *times3;
-@property (strong, nonatomic) IBOutlet UILabel *times4;
-@property (strong, nonatomic) IBOutlet UILabel *times5;
-@property (strong, nonatomic) IBOutlet UILabel *times6;
-@property (strong, nonatomic) IBOutlet UILabel *times7;
-@property (strong, nonatomic) IBOutlet UILabel *times8;
-@property (strong, nonatomic) IBOutlet UILabel *times9;
-@property (strong, nonatomic) IBOutlet UILabel *times0;
 
+@property (strong, nonatomic) NSTimer *schedTimer;
+@property (strong, nonatomic) GKRandomDistribution *randomDistribution;
+//@property (weak, nonatomic)NSArray *lables; //Of UILabel
+//@property (strong, nonatomic)NSArray *values;
 
 @end
 
 @implementation ViewController
 
-- (IBAction)startButtonPressed:(id)sender {
+
+- (void)setupGenerator
+{
+    self.randomDistribution = nil;
     
+//    GKRandomDistribution *randomDist = [GKRandomDistribution ]
+}
+
+- (void)generateNewNumber
+{
+    
+}
+- (void)stratGeneratingRandomNumbers
+{
+    
+    [self.schedTimer invalidate];
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                      target:self
+                                                    selector:@selector(generator)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    self.schedTimer = timer;
+}
+
+
+- (IBAction)startButtonPressed:(id)sender {
+    [self setupGenerator];
+    [self stratGeneratingRandomNumbers];
 }
 
 - (IBAction)stopButtonPressed {
+    
+    [self.schedTimer invalidate];
+    self.schedTimer = nil;
+    
 }
 
--(void)stratGeneratingRandomNumbers {
-//    set up a timer
+- (void)generator
+{
+    NSLog(@"Heyy, generated");
     // Ask for the nextInt
+    
+    // put it into the array
+    // update the display
 
-// put it into the array
-// update the display
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
