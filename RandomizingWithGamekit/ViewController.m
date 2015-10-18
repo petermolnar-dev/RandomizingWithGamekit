@@ -13,6 +13,10 @@
 
 @property (strong, nonatomic) NSTimer *schedTimer;
 @property (strong, nonatomic) GKRandomDistribution *randomDistribution;
+@property (strong, nonatomic) GKShuffledDistribution *shuffledDistribution;
+@property (strong, nonatomic) GKGaussianDistribution *gaussianDistribution;
+@property (weak, nonatomic) GKRandomDistribution *currDist;
+
 //@property (weak, nonatomic)NSArray *lables; //Of UILabel
 //@property (strong, nonatomic)NSArray *values;
 
@@ -21,11 +25,17 @@
 @implementation ViewController
 
 
-- (void)setupGenerator
+- (void)setupGenerators
 {
     self.randomDistribution = nil;
     
-//    GKRandomDistribution *randomDist = [GKRandomDistribution ]
+    GKRandomDistribution *randomDist = [GKRandomDistribution distributionWithLowestValue:1 highestValue:10];
+    GKShuffledDistribution *shuffledDist = [GKShuffledDistribution distributionWithLowestValue:1 highestValue:10];
+    GKGaussianDistribution *gaussianDist = [GKGaussianDistribution distributionWithLowestValue:1 highestValue:10];
+    
+    self.randomDistribution = randomDist;
+    self.shuffledDistribution = shuffledDist;
+    self.gaussianDistribution = gaussianDist;
 }
 
 - (void)generateNewNumber
@@ -47,7 +57,8 @@
 
 
 - (IBAction)startButtonPressed:(id)sender {
-    [self setupGenerator];
+    [self setupGenerators];
+    [self setCurrDist:self.shuffledDistribution];
     [self stratGeneratingRandomNumbers];
 }
 
@@ -60,7 +71,8 @@
 
 - (void)generator
 {
-    NSLog(@"Heyy, generated");
+    NSLog(@"Heyy, generated: %d", [self.shuffledDistribution nextInt]
+          );
     // Ask for the nextInt
     
     // put it into the array
