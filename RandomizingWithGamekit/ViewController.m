@@ -7,52 +7,53 @@
 //
 
 #import "ViewController.h"
+#import <QuartzCore/QuartzCore.h>
 @import GameKit;
 
 @interface ViewController ()
 
+// Timer for the generation signal
 @property (strong, nonatomic) NSTimer *schedTimer;
+
+// Distributions by type
 @property (strong, nonatomic) GKRandomDistribution *randomDistribution;
 @property (strong, nonatomic) GKShuffledDistribution *shuffledDistribution;
 @property (strong, nonatomic) GKGaussianDistribution *gaussianDistribution;
+
 @property (weak, nonatomic) GKRandomDistribution *currDist;
 
-//@property (weak, nonatomic)NSArray *lables; //Of UILabel
-@property (strong, nonatomic)NSMutableArray *values;
+@property (strong, nonatomic)NSMutableArray *statisticValues;
+@property (strong, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) IBOutlet UIButton *stopButton;
 
+@property (strong, nonatomic) IBOutlet UISegmentedControl *randomizerTypeSelector;
+@property (strong, nonatomic) IBOutlet UILabel *currentDistributionNameLabel;
 
 @end
 
 @implementation ViewController
 
-
-- (void)setupGenerators
+- (void) viewDidAppear:(BOOL)animated
 {
-    self.randomDistribution = nil;
-    
-    GKRandomDistribution *randomDist = [GKRandomDistribution distributionWithLowestValue:1
-                                                                            highestValue:self.rangeHighestValue];
-    GKShuffledDistribution *shuffledDist = [GKShuffledDistribution distributionWithLowestValue:1
-                                                                                  highestValue:self.rangeHighestValue];
-    GKGaussianDistribution *gaussianDist = [GKGaussianDistribution distributionWithLowestValue:1
-                                                                                  highestValue:self.rangeHighestValue];
-    
-    self.randomDistribution = randomDist;
-    self.shuffledDistribution = shuffledDist;
-    self.gaussianDistribution = gaussianDist;
+    [super viewDidAppear:animated];
+//    [self.startButton.layer setCornerRadius:self.startButton.bounds.size.width/2];
+//    [self.startButton.layer setBackgroundColor:(__bridge CGColorRef _Nullable)([UIColor greenColor])];
+//    [self.view setNeedsDisplay];
     
 }
 
-- (NSMutableArray *)values
+#pragma mark - Accessors
+
+- (NSMutableArray *)statisticValues
 {
-    if (!_values) {
+    if (!_statisticValues) {
         // Init the array with all of the elements
         for (int i=0; i <  self.rangeHighestValue; i++) {
-            [_values insertObject:@0 atIndex:i];
+            [_statisticValues insertObject:@0 atIndex:i];
         }
     }
     
-    return _values;
+    return _statisticValues;
 }
 
 - (NSInteger) rangeHighestValue {
@@ -62,6 +63,40 @@
     
     return _rangeHighestValue;
 }
+
+- (GKRandomDistribution *)randomDistribution
+{
+    if (!_randomDistribution) {
+        GKRandomDistribution *randomDist = [GKRandomDistribution distributionWithLowestValue:1
+                                                                                highestValue:self.rangeHighestValue];
+        _randomDistribution = randomDist;
+    }
+    
+    return _randomDistribution;
+}
+
+- (GKShuffledDistribution *)shuffledDistribution
+{
+    if (!_shuffledDistribution) {
+        GKShuffledDistribution *shuffledDist = [GKShuffledDistribution distributionWithLowestValue:1
+                                                                                      highestValue:self.rangeHighestValue];
+        _shuffledDistribution = shuffledDist;
+    }
+    
+    return _shuffledDistribution;
+}
+
+- (GKGaussianDistribution *)gaussianDistribution
+{
+    if (!_gaussianDistribution) {
+        GKGaussianDistribution *gaussianDist = [GKGaussianDistribution distributionWithLowestValue:1
+                                                                                      highestValue:self.rangeHighestValue];
+        _gaussianDistribution = gaussianDist;
+    }
+    return _gaussianDistribution;
+}
+
+#pragma mark - Start and stop behaviour
 
 - (void)stratGeneratingRandomNumbers
 {
@@ -78,8 +113,19 @@
 
 
 - (IBAction)startButtonPressed:(id)sender {
-    [self setupGenerators];
-    [self setCurrDist:self.shuffledDistribution];
+    switch (self.randomizerTypeSelector.selectedSegmentIndex) {
+        case 0:
+            [self setCurrDist:self.randomDistribution];
+            break;
+        case 1:
+            [self setCurrDist:self.shuffledDistribution];
+            break;
+        case 2:
+            [self setCurrDist:self.gaussianDistribution];
+            break;
+    }
+    
+   [self.currentDistributionNameLabel setText:NSStringFromClass([self.currDist class])];
     [self stratGeneratingRandomNumbers];
 }
 
@@ -90,10 +136,12 @@
     
 }
 
+#pragma mark - Number generation and helpers
+
 - (void)generator
 {
     // Ask for the nextInt
-    NSInteger *currentGeneratedValue = [self.shuffledDistribution nextInt];
+    NSInteger *currentGeneratedValue = [self.currDist nextInt];
     NSLog(@"Heyy, generated: %ld", (long)currentGeneratedValue);
     
 //    self.values[(int)currentGeneratedValue] += 1;
