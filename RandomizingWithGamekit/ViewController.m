@@ -18,7 +18,8 @@
 @property (weak, nonatomic) GKRandomDistribution *currDist;
 
 //@property (weak, nonatomic)NSArray *lables; //Of UILabel
-//@property (strong, nonatomic)NSArray *values;
+@property (strong, nonatomic)NSMutableArray *values;
+
 
 @end
 
@@ -29,25 +30,45 @@
 {
     self.randomDistribution = nil;
     
-    GKRandomDistribution *randomDist = [GKRandomDistribution distributionWithLowestValue:1 highestValue:10];
-    GKShuffledDistribution *shuffledDist = [GKShuffledDistribution distributionWithLowestValue:1 highestValue:10];
-    GKGaussianDistribution *gaussianDist = [GKGaussianDistribution distributionWithLowestValue:1 highestValue:10];
+    GKRandomDistribution *randomDist = [GKRandomDistribution distributionWithLowestValue:1
+                                                                            highestValue:self.rangeHighestValue];
+    GKShuffledDistribution *shuffledDist = [GKShuffledDistribution distributionWithLowestValue:1
+                                                                                  highestValue:self.rangeHighestValue];
+    GKGaussianDistribution *gaussianDist = [GKGaussianDistribution distributionWithLowestValue:1
+                                                                                  highestValue:self.rangeHighestValue];
     
     self.randomDistribution = randomDist;
     self.shuffledDistribution = shuffledDist;
     self.gaussianDistribution = gaussianDist;
-}
-
-- (void)generateNewNumber
-{
     
 }
+
+- (NSMutableArray *)values
+{
+    if (!_values) {
+        // Init the array with all of the elements
+        for (int i=0; i <  self.rangeHighestValue; i++) {
+            [_values insertObject:@0 atIndex:i];
+        }
+    }
+    
+    return _values;
+}
+
+- (NSInteger) rangeHighestValue {
+    if (!_rangeHighestValue || _rangeHighestValue == 0) {
+        _rangeHighestValue = 10;
+    }
+    
+    return _rangeHighestValue;
+}
+
 - (void)stratGeneratingRandomNumbers
 {
     
     [self.schedTimer invalidate];
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                       target:self
                                                     selector:@selector(generator)
                                                     userInfo:nil
@@ -71,27 +92,16 @@
 
 - (void)generator
 {
-    NSLog(@"Heyy, generated: %d", [self.shuffledDistribution nextInt]
-          );
     // Ask for the nextInt
+    NSInteger *currentGeneratedValue = [self.shuffledDistribution nextInt];
+    NSLog(@"Heyy, generated: %ld", (long)currentGeneratedValue);
     
-    // put it into the array
+//    self.values[(int)currentGeneratedValue] += 1;
+    
     // update the display
 
 }
 
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-// set up an array of the UILables
-//    Set up a random generator with the given type and seed
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
