@@ -15,19 +15,18 @@
 // Timer for the generation signal
 @property (strong, nonatomic) NSTimer *schedTimer;
 
-// Distributions by type
-@property (strong, nonatomic) GKRandomDistribution *randomDistribution;
-@property (strong, nonatomic) GKShuffledDistribution *shuffledDistribution;
-@property (strong, nonatomic) GKGaussianDistribution *gaussianDistribution;
 
 @property (weak, nonatomic) GKRandomDistribution *currDist;
 
 @property (strong, nonatomic)NSMutableArray *statisticValues;
+
+// Outlets
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UIButton *stopButton;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *randomizerTypeSelector;
 @property (strong, nonatomic) IBOutlet UILabel *currentDistributionNameLabel;
+@property (strong, nonatomic) IBOutlet UIView *dashBoardView;
 
 @end
 
@@ -47,10 +46,15 @@
 - (NSMutableArray *)statisticValues
 {
     if (!_statisticValues) {
+        NSMutableArray *statisticValues = [[NSMutableArray alloc] init];
+        
         // Init the array with all of the elements
         for (int i=0; i <  self.rangeHighestValue; i++) {
-            [_statisticValues insertObject:@0 atIndex:i];
+            [statisticValues insertObject:[NSNumber numberWithInt:0] atIndex:i];
+             NSLog(@"%@", statisticValues);
         }
+        _statisticValues = statisticValues;
+         NSLog(@"%@", _statisticValues);
     }
     
     return _statisticValues;
@@ -64,37 +68,12 @@
     return _rangeHighestValue;
 }
 
-- (GKRandomDistribution *)randomDistribution
+- (GKRandomDistribution *)createRandomDistribution:(NSString *)fromClassName
 {
-    if (!_randomDistribution) {
-        GKRandomDistribution *randomDist = [GKRandomDistribution distributionWithLowestValue:1
-                                                                                highestValue:self.rangeHighestValue];
-        _randomDistribution = randomDist;
-    }
     
-    return _randomDistribution;
+    return [NSClassFromString(fromClassName) distributionWithLowestValue:1 highestValue:10];
 }
 
-- (GKShuffledDistribution *)shuffledDistribution
-{
-    if (!_shuffledDistribution) {
-        GKShuffledDistribution *shuffledDist = [GKShuffledDistribution distributionWithLowestValue:1
-                                                                                      highestValue:self.rangeHighestValue];
-        _shuffledDistribution = shuffledDist;
-    }
-    
-    return _shuffledDistribution;
-}
-
-- (GKGaussianDistribution *)gaussianDistribution
-{
-    if (!_gaussianDistribution) {
-        GKGaussianDistribution *gaussianDist = [GKGaussianDistribution distributionWithLowestValue:1
-                                                                                      highestValue:self.rangeHighestValue];
-        _gaussianDistribution = gaussianDist;
-    }
-    return _gaussianDistribution;
-}
 
 #pragma mark - Start and stop behaviour
 
@@ -109,31 +88,29 @@
                                                     userInfo:nil
                                                      repeats:YES];
     self.schedTimer = timer;
+   
 }
 
 
 - (IBAction)startButtonPressed:(id)sender {
-    switch (self.randomizerTypeSelector.selectedSegmentIndex) {
-        case 0:
-            [self setCurrDist:self.randomDistribution];
-            break;
-        case 1:
-            [self setCurrDist:self.shuffledDistribution];
-            break;
-        case 2:
-            [self setCurrDist:self.gaussianDistribution];
-            break;
-    }
+    NSString *className = [[NSString alloc] init];
+    className = [self.randomizerTypeSelector titleForSegmentAtIndex:self.randomizerTypeSelector.selectedSegmentIndex];
+    self.currDist = [self createRandomDistribution:className];
     
-   [self.currentDistributionNameLabel setText:NSStringFromClass([self.currDist class])];
+   [self.currentDistributionNameLabel setText:className];
+    if (!self.currDist)
+    {
     [self stratGeneratingRandomNumbers];
+    } else {
+        NSLog(@"No usable randomizer class");
+    }
 }
 
 - (IBAction)stopButtonPressed {
     
     [self.schedTimer invalidate];
     self.schedTimer = nil;
-    
+     NSLog(@"%@", self.statisticValues);
 }
 
 #pragma mark - Number generation and helpers
@@ -141,7 +118,12 @@
 - (void)generator
 {
     // Ask for the nextInt
-    NSInteger *currentGeneratedValue = [self.currDist nextInt];
+    int currentGeneratedValue = [self.currDist nextInt];
+//    Get the corresponding value from the valuelist
+    NSNumber *currNum = self.statisticValues[currentGeneratedValue-1];
+    currNum = @([currNum integerValue] + 1);
+    self.statisticValues[currentGeneratedValue-1] = currNum;
+    
     NSLog(@"Heyy, generated: %ld", (long)currentGeneratedValue);
     
 //    self.values[(int)currentGeneratedValue] += 1;

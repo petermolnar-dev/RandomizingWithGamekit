@@ -49,13 +49,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucf-sb-7aV">
+                                <rect key="frame" x="20" y="175" width="560" height="405"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ph-mY-mHa" secondAttribute="trailing" constant="7" id="0A0-Hl-Xic"/>
+                            <constraint firstItem="Ucf-sb-7aV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0En-Nn-HfA"/>
                             <constraint firstItem="z5A-9u-1yI" firstAttribute="top" secondItem="hOb-yU-qYE" secondAttribute="bottom" constant="49" id="15x-a9-wUd"/>
+                            <constraint firstItem="Ucf-sb-7aV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="3qf-AT-9fO"/>
                             <constraint firstItem="hOb-yU-qYE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="4rS-XK-4I4"/>
+                            <constraint firstItem="Ucf-sb-7aV" firstAttribute="top" secondItem="28f-wM-Fw3" secondAttribute="bottom" constant="40" id="IfO-ep-CQn"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ucf-sb-7aV" secondAttribute="bottom" constant="20" id="ZBZ-8L-92P"/>
                             <constraint firstItem="hOb-yU-qYE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="duo-n9-riG"/>
                             <constraint firstItem="z5A-9u-1yI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="6" id="gum-0a-GZm"/>
                             <constraint firstItem="28f-wM-Fw3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="sFw-8i-HwF"/>
@@ -67,6 +76,7 @@
                     </view>
                     <connections>
                         <outlet property="currentDistributionNameLabel" destination="28f-wM-Fw3" id="l2P-B0-NOP"/>
+                        <outlet property="dashBoardView" destination="Ucf-sb-7aV" id="fMS-31-FMS"/>
                         <outlet property="randomizerTypeSelector" destination="hOb-yU-qYE" id="ZRz-ul-3L6"/>
                         <outlet property="startButton" destination="z5A-9u-1yI" id="xaX-Fu-B58"/>
                         <outlet property="stopButton" destination="3Ph-mY-mHa" id="hvP-FH-9cW"/>
