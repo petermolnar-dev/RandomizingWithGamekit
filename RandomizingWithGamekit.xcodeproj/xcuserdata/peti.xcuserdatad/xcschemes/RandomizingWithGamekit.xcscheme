@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C74BAC631BD97FF3005C2287"
+               BuildableName = "RandomizingWithGamekitTests.xctest"
+               BlueprintName = "RandomizingWithGamekitTests"
+               ReferencedContainer = "container:RandomizingWithGamekit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

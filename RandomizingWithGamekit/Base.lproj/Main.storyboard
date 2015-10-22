@@ -18,8 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5A-9u-1yI">
-                                <rect key="frame" x="26" y="97" width="34" height="30"/>
+                                <rect key="frame" x="26" y="97" width="60" height="60"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="dAB-kH-v03"/>
+                                </constraints>
                                 <state key="normal" title="Start"/>
                                 <connections>
                                     <action selector="startButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6qS-Ub-QGB"/>
@@ -43,10 +46,10 @@
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28f-wM-Fw3">
-                                <rect key="frame" x="20" y="135" width="560" height="0.0"/>
+                                <rect key="frame" x="20" y="120" width="560" height="0.0"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucf-sb-7aV">
@@ -63,16 +66,27 @@
                             <constraint firstItem="z5A-9u-1yI" firstAttribute="top" secondItem="hOb-yU-qYE" secondAttribute="bottom" constant="49" id="15x-a9-wUd"/>
                             <constraint firstItem="Ucf-sb-7aV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="3qf-AT-9fO"/>
                             <constraint firstItem="hOb-yU-qYE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="4rS-XK-4I4"/>
-                            <constraint firstItem="Ucf-sb-7aV" firstAttribute="top" secondItem="28f-wM-Fw3" secondAttribute="bottom" constant="40" id="IfO-ep-CQn"/>
+                            <constraint firstItem="Ucf-sb-7aV" firstAttribute="top" secondItem="z5A-9u-1yI" secondAttribute="bottom" constant="18" id="E7X-H4-eWr"/>
+                            <constraint firstItem="Ucf-sb-7aV" firstAttribute="top" secondItem="28f-wM-Fw3" secondAttribute="bottom" constant="55" id="IfO-ep-CQn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ucf-sb-7aV" secondAttribute="bottom" constant="20" id="ZBZ-8L-92P"/>
                             <constraint firstItem="hOb-yU-qYE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="duo-n9-riG"/>
                             <constraint firstItem="z5A-9u-1yI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="6" id="gum-0a-GZm"/>
                             <constraint firstItem="28f-wM-Fw3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="sFw-8i-HwF"/>
                             <constraint firstItem="28f-wM-Fw3" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="tPL-bv-NUd"/>
-                            <constraint firstItem="z5A-9u-1yI" firstAttribute="baseline" secondItem="3Ph-mY-mHa" secondAttribute="baseline" id="u3y-uZ-uRI"/>
-                            <constraint firstItem="28f-wM-Fw3" firstAttribute="top" secondItem="3Ph-mY-mHa" secondAttribute="bottom" constant="8" id="wO0-HP-ZKC"/>
+                            <constraint firstItem="z5A-9u-1yI" firstAttribute="baseline" secondItem="3Ph-mY-mHa" secondAttribute="baseline" constant="15" id="u3y-uZ-uRI"/>
+                            <constraint firstItem="z5A-9u-1yI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="6" id="wG0-Wa-cLU"/>
+                            <constraint firstItem="28f-wM-Fw3" firstAttribute="top" secondItem="3Ph-mY-mHa" secondAttribute="bottom" constant="-7" id="wO0-HP-ZKC"/>
+                            <constraint firstItem="z5A-9u-1yI" firstAttribute="top" secondItem="hOb-yU-qYE" secondAttribute="bottom" constant="49" id="yop-EJ-SH5"/>
                             <constraint firstItem="hOb-yU-qYE" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="yzf-Jo-ugm"/>
+                            <constraint firstItem="z5A-9u-1yI" firstAttribute="top" secondItem="3Ph-mY-mHa" secondAttribute="top" id="z17-ow-ArB"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="15x-a9-wUd"/>
+                                <exclude reference="gum-0a-GZm"/>
+                                <exclude reference="u3y-uZ-uRI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="currentDistributionNameLabel" destination="28f-wM-Fw3" id="l2P-B0-NOP"/>

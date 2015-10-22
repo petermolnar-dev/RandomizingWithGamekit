@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C74BAC671BD97FF3005C2287 /* RandomizingWithGamekitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C74BAC661BD97FF3005C2287 /* RandomizingWithGamekitTests.m */; };
+		C74BAC721BD980F7005C2287 /* RandomClassFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C74BAC711BD980F7005C2287 /* RandomClassFactory.m */; settings = {ASSET_TAGS = (); }; };
 		C77A76281BD17F6C00A7DDD0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C77A76271BD17F6C00A7DDD0 /* main.m */; };
 		C77A762B1BD17F6C00A7DDD0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C77A762A1BD17F6C00A7DDD0 /* AppDelegate.m */; };
 		C77A762E1BD17F6C00A7DDD0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77A762D1BD17F6C00A7DDD0 /* ViewController.m */; };
@@ -15,7 +17,22 @@
 		C77A76361BD17F6C00A7DDD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C77A76341BD17F6C00A7DDD0 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C74BAC691BD97FF3005C2287 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C77A761B1BD17F6C00A7DDD0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C77A76221BD17F6C00A7DDD0;
+			remoteInfo = RandomizingWithGamekit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C74BAC641BD97FF3005C2287 /* RandomizingWithGamekitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandomizingWithGamekitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C74BAC661BD97FF3005C2287 /* RandomizingWithGamekitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RandomizingWithGamekitTests.m; sourceTree = "<group>"; };
+		C74BAC681BD97FF3005C2287 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C74BAC701BD980F7005C2287 /* RandomClassFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomClassFactory.h; sourceTree = "<group>"; };
+		C74BAC711BD980F7005C2287 /* RandomClassFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomClassFactory.m; sourceTree = "<group>"; };
 		C77A76231BD17F6C00A7DDD0 /* RandomizingWithGamekit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomizingWithGamekit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77A76271BD17F6C00A7DDD0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C77A76291BD17F6C00A7DDD0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -29,6 +46,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C74BAC611BD97FF3005C2287 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C77A76201BD17F6C00A7DDD0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,10 +63,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C74BAC651BD97FF3005C2287 /* RandomizingWithGamekitTests */ = {
+			isa = PBXGroup;
+			children = (
+				C74BAC661BD97FF3005C2287 /* RandomizingWithGamekitTests.m */,
+				C74BAC681BD97FF3005C2287 /* Info.plist */,
+			);
+			path = RandomizingWithGamekitTests;
+			sourceTree = "<group>";
+		};
 		C77A761A1BD17F6C00A7DDD0 = {
 			isa = PBXGroup;
 			children = (
 				C77A76251BD17F6C00A7DDD0 /* RandomizingWithGamekit */,
+				C74BAC651BD97FF3005C2287 /* RandomizingWithGamekitTests */,
 				C77A76241BD17F6C00A7DDD0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				C77A76231BD17F6C00A7DDD0 /* RandomizingWithGamekit.app */,
+				C74BAC641BD97FF3005C2287 /* RandomizingWithGamekitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,6 +97,8 @@
 				C77A762A1BD17F6C00A7DDD0 /* AppDelegate.m */,
 				C77A762C1BD17F6C00A7DDD0 /* ViewController.h */,
 				C77A762D1BD17F6C00A7DDD0 /* ViewController.m */,
+				C74BAC701BD980F7005C2287 /* RandomClassFactory.h */,
+				C74BAC711BD980F7005C2287 /* RandomClassFactory.m */,
 				C77A762F1BD17F6C00A7DDD0 /* Main.storyboard */,
 				C77A76321BD17F6C00A7DDD0 /* Assets.xcassets */,
 				C77A76341BD17F6C00A7DDD0 /* LaunchScreen.storyboard */,
@@ -82,6 +119,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C74BAC631BD97FF3005C2287 /* RandomizingWithGamekitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C74BAC6B1BD97FF3005C2287 /* Build configuration list for PBXNativeTarget "RandomizingWithGamekitTests" */;
+			buildPhases = (
+				C74BAC601BD97FF3005C2287 /* Sources */,
+				C74BAC611BD97FF3005C2287 /* Frameworks */,
+				C74BAC621BD97FF3005C2287 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C74BAC6A1BD97FF3005C2287 /* PBXTargetDependency */,
+			);
+			name = RandomizingWithGamekitTests;
+			productName = RandomizingWithGamekitTests;
+			productReference = C74BAC641BD97FF3005C2287 /* RandomizingWithGamekitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C77A76221BD17F6C00A7DDD0 /* RandomizingWithGamekit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C77A763A1BD17F6C00A7DDD0 /* Build configuration list for PBXNativeTarget "RandomizingWithGamekit" */;
@@ -108,6 +163,10 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Peter Molnar";
 				TargetAttributes = {
+					C74BAC631BD97FF3005C2287 = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = C77A76221BD17F6C00A7DDD0;
+					};
 					C77A76221BD17F6C00A7DDD0 = {
 						CreatedOnToolsVersion = 7.0.1;
 					};
@@ -127,11 +186,19 @@
 			projectRoot = "";
 			targets = (
 				C77A76221BD17F6C00A7DDD0 /* RandomizingWithGamekit */,
+				C74BAC631BD97FF3005C2287 /* RandomizingWithGamekitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C74BAC621BD97FF3005C2287 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C77A76211BD17F6C00A7DDD0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -145,17 +212,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C74BAC601BD97FF3005C2287 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C74BAC671BD97FF3005C2287 /* RandomizingWithGamekitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C77A761F1BD17F6C00A7DDD0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C77A762E1BD17F6C00A7DDD0 /* ViewController.m in Sources */,
 				C77A762B1BD17F6C00A7DDD0 /* AppDelegate.m in Sources */,
+				C74BAC721BD980F7005C2287 /* RandomClassFactory.m in Sources */,
 				C77A76281BD17F6C00A7DDD0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C74BAC6A1BD97FF3005C2287 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C77A76221BD17F6C00A7DDD0 /* RandomizingWithGamekit */;
+			targetProxy = C74BAC691BD97FF3005C2287 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C77A762F1BD17F6C00A7DDD0 /* Main.storyboard */ = {
@@ -177,6 +261,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C74BAC6C1BD97FF3005C2287 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RandomizingWithGamekitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = petermolnar.hu.RandomizingWithGamekitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RandomizingWithGamekit.app/RandomizingWithGamekit";
+			};
+			name = Debug;
+		};
+		C74BAC6D1BD97FF3005C2287 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RandomizingWithGamekitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = petermolnar.hu.RandomizingWithGamekitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RandomizingWithGamekit.app/RandomizingWithGamekit";
+			};
+			name = Release;
+		};
 		C77A76381BD17F6C00A7DDD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -282,6 +390,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C74BAC6B1BD97FF3005C2287 /* Build configuration list for PBXNativeTarget "RandomizingWithGamekitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C74BAC6C1BD97FF3005C2287 /* Debug */,
+				C74BAC6D1BD97FF3005C2287 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		C77A761E1BD17F6C00A7DDD0 /* Build configuration list for PBXProject "RandomizingWithGamekit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -298,6 +414,7 @@
 				C77A763C1BD17F6C00A7DDD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

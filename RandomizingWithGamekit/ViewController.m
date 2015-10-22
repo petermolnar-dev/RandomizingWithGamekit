@@ -41,6 +41,17 @@
     
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+   
+    
+    self.startButton.layer.cornerRadius = self.startButton.bounds.size.width/2;
+    [self.startButton setBackgroundColor:[UIColor greenColor]];
+    [self.startButton setTintColor:[UIColor whiteColor]];
+    self.startButton.clipsToBounds = true;
+}
+
 #pragma mark - Accessors
 
 - (NSMutableArray *)statisticValues
@@ -68,10 +79,19 @@
     return _rangeHighestValue;
 }
 
-- (GKRandomDistribution *)createRandomDistribution:(NSString *)fromClassName
+- (void)createRandomDistribution:(NSString *)fromClassName
 {
+    GKRandomDistribution *randomDist;
+    randomDist = [NSClassFromString(fromClassName) distributionWithLowestValue:1 highestValue:10];
+    int currentGeneratedValue = [randomDist nextInt];
+    //    Get the corresponding value from the valuelist
+    NSNumber *currNum = self.statisticValues[currentGeneratedValue-1];
+    currNum = @([currNum integerValue] + 1);
+    self.statisticValues[currentGeneratedValue-1] = currNum;
     
-    return [NSClassFromString(fromClassName) distributionWithLowestValue:1 highestValue:10];
+    NSLog(@"Heyy, generated: %ld", (long)currentGeneratedValue);
+    
+    
 }
 
 
@@ -95,15 +115,15 @@
 - (IBAction)startButtonPressed:(id)sender {
     NSString *className = [[NSString alloc] init];
     className = [self.randomizerTypeSelector titleForSegmentAtIndex:self.randomizerTypeSelector.selectedSegmentIndex];
-    self.currDist = [self createRandomDistribution:className];
+    [self createRandomDistribution:className];
     
-   [self.currentDistributionNameLabel setText:className];
-    if (!self.currDist)
-    {
-    [self stratGeneratingRandomNumbers];
-    } else {
-        NSLog(@"No usable randomizer class");
-    }
+//   [self.currentDistributionNameLabel setText:className];
+//    if (!self.currDist)
+//    {
+//    [self stratGeneratingRandomNumbers];
+//    } else {
+//        NSLog(@"No usable randomizer class");
+//    }
 }
 
 - (IBAction)stopButtonPressed {
