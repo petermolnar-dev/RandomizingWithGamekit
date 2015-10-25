@@ -13,17 +13,17 @@
 + (GKRandomDistribution *)randomDistribution:(NSUInteger)classType minValue:(NSInteger)minValue maxValue:(NSInteger)maxValue;
 {
     switch (classType) {
-        case 1:
+        case 0:
             return [GKRandomDistribution distributionWithLowestValue:minValue
-                                                 highestValue:maxValue];
+                                                        highestValue:maxValue];
+            break;
+        case 1:
+            return [GKShuffledDistribution distributionWithLowestValue:minValue
+                                                          highestValue:maxValue];
             break;
         case 2:
-            return [GKShuffledDistribution distributionWithLowestValue:minValue
-                                                        highestValue:maxValue];
-            break;
-        case 3:
             return [GKGaussianDistribution distributionWithLowestValue:minValue
-                                                        highestValue:maxValue];
+                                                          highestValue:maxValue];
             break;
             
         default:
