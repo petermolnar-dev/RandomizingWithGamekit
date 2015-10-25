@@ -35,13 +35,15 @@
     [super viewWillAppear:animated];
 
     self.startButton.layer.cornerRadius = self.startButton.bounds.size.width/2;
-    [self.startButton setBackgroundColor:[UIColor greenColor]];
-    [self.startButton setTintColor:[UIColor whiteColor]];
+    self.startButton.layer.borderWidth = 1.0f;
+    self.startButton.layer.borderColor =[[UIColor greenColor] CGColor];
+//    [self.startButton setBackgroundColor:[UIColor greenColor]];
+//    [self.startButton setTintColor:[UIColor whiteColor]];
     self.startButton.clipsToBounds = true;
 
     self.stopButton.layer.cornerRadius = self.startButton.bounds.size.width/2;
-    [self.stopButton setBackgroundColor:[UIColor redColor]];
-    [self.stopButton setTintColor:[UIColor whiteColor]];
+    self.stopButton.layer.borderWidth = 1.0f;
+    self.stopButton.layer.borderColor =[[UIColor redColor] CGColor];
     self.stopButton.clipsToBounds = true;
     [self.stopButton setEnabled:false];
     
