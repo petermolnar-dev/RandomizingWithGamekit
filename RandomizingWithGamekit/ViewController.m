@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSTimer *schedTimer;
 
 // Randomizer and its statistic collector
-@property (weak, nonatomic) GKRandomDistribution *currDist;
+@property (weak, nonatomic) GKRandomDistribution *currentRandomDistribution;
 @property (strong, nonatomic)NSMutableArray *statisticValues;
 
 // Outlets
@@ -30,38 +30,37 @@
 
 @implementation ViewController
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    self.startButton.layer.cornerRadius = self.startButton.bounds.size.width/2;
-    self.startButton.layer.borderWidth = 1.0f;
-    self.startButton.layer.borderColor =[[UIColor greenColor] CGColor];
-//    [self.startButton setBackgroundColor:[UIColor greenColor]];
-//    [self.startButton setTintColor:[UIColor whiteColor]];
-    self.startButton.clipsToBounds = true;
+    [self buttonSetup:self.startButton borderColor:[UIColor greenColor]];
+    [self buttonSetup:self.stopButton borderColor:[UIColor redColor]];
 
-    self.stopButton.layer.cornerRadius = self.startButton.bounds.size.width/2;
-    self.stopButton.layer.borderWidth = 1.0f;
-    self.stopButton.layer.borderColor =[[UIColor redColor] CGColor];
-    self.stopButton.clipsToBounds = true;
-    [self.stopButton setEnabled:false];
-    
-    
 }
+
+
+- (void)buttonSetup:(UIButton *)button borderColor:(UIColor *)borderColor
+{
+    button.layer.cornerRadius = button.bounds.size.width/2;
+    button.layer.borderWidth = 1.0f;
+    button.layer.borderColor =[borderColor CGColor];
+    button.clipsToBounds = true;
+}
+
 
 #pragma mark - Accessors
 
 - (NSMutableArray *)statisticValues
 {
     if (!_statisticValues) {
-        _statisticValues = [self resetStatisticValues];
+        _statisticValues = [self emptyStatisticValues];
     }
     
     return _statisticValues;
 }
 
-- (NSInteger) rangeHighestValue {
+- (NSInteger)rangeHighestValue {
     if (!_rangeHighestValue || _rangeHighestValue == 0) {
         _rangeHighestValue = 10;
     }
@@ -69,30 +68,17 @@
     return _rangeHighestValue;
 }
 
-- (GKRandomDistribution *)currDist
+- (GKRandomDistribution *)currentRandomDistribution
 {
     GKRandomDistribution *randomDist = [RandomClassFactory randomDistribution:[self.randomizerTypeSelector selectedSegmentIndex] minValue:1 maxValue:10];
-    _currDist = randomDist;
+
+    _currentRandomDistribution = randomDist;
     
-    return _currDist;
+    return _currentRandomDistribution;
 }
 
 
 #pragma mark - Start and stop behaviour
-
-- (void)stratGeneratingRandomNumbers
-{
-    [self.schedTimer invalidate];
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                      target:self
-                                                    selector:@selector(generator)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    self.schedTimer = timer;
-   
-}
-
 
 - (IBAction)startPressed:(UIButton *)sender
 {
@@ -102,7 +88,7 @@
     [self resetStatisticDisplay];
     
     self.statisticValues = nil;
-    self.statisticValues = [self resetStatisticValues];
+    self.statisticValues = [self emptyStatisticValues];
     [self stratGeneratingRandomNumbers];
 }
 
@@ -114,38 +100,68 @@
     
     [self.schedTimer invalidate];
     self.schedTimer = nil;
-    NSLog(@"%@", self.statisticValues);
 }
 
 
 #pragma mark - Number generation and helpers
 
+- (void)stratGeneratingRandomNumbers
+{
+    [self.schedTimer invalidate];
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                      target:self
+                                                    selector:@selector(generator)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    self.schedTimer = timer;
+    
+}
+
+
 - (void)generator
 {
-    // Ask for the nextInt
-    int currentGeneratedValue = [self.currDist nextInt];
+    int currentGeneratedValue = [self.currentRandomDistribution nextInt];
 
-    //    Get the corresponding value from the valuelist
-    NSNumber *currNum = self.statisticValues[currentGeneratedValue-1];
-    currNum = @([currNum integerValue] + 1);
-    self.statisticValues[currentGeneratedValue-1] = currNum;
+    NSNumber *currentNumber = self.statisticValues[currentGeneratedValue-1];
+    self.statisticValues[currentGeneratedValue-1] =  @([currentNumber integerValue] + 1);
     
-    // update the display
     self.generatedNumberLabel.text = [NSString stringWithFormat:@"%d",currentGeneratedValue];
-    UILabel *classOf = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
-    classOf.text = NSStringFromClass([self.currDist class]);
-    [self.dashBoardView addSubview:classOf];
+    
+    [self resetStatisticDisplay];
+    [self updateStatisticDisplay];
     [self.view setNeedsDisplay];
 }
 
-- (void) resetStatisticDisplay
+
+#pragma mark - Statistic View manipulation
+
+- (void)updateStatisticDisplay
+{
+    UILabel *classOf = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
+    classOf.text = NSStringFromClass([self.currentRandomDistribution class]);
+    
+    [self.dashBoardView addSubview:classOf];
+    int i = 0;
+    
+    for (NSNumber *currentNumber in self.statisticValues) {
+        i++;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, i*20, 200, 20)];
+        label.text =  [NSString stringWithFormat:@"%d: %d",i,[currentNumber intValue]];
+        
+        [self.dashBoardView addSubview:label];
+    }
+
+}
+
+- (void)resetStatisticDisplay
 {
     for (UIView *curView in [self.dashBoardView subviews]) {
         [curView removeFromSuperview];
     }
 }
 
-- (NSMutableArray *)resetStatisticValues
+- (NSMutableArray *)emptyStatisticValues
 {
     NSMutableArray *statisticValues = [[NSMutableArray alloc] init];
     
